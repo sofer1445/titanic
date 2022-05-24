@@ -1,10 +1,13 @@
 import javax.swing.*;
+import java.io.FileReader;
 
 class Main extends JFrame {
 
     public static void main(String[] args) {
         new Main();
+
     }
+
 
     public Main() {
         this.setTitle("Titanic Passengers Data");
