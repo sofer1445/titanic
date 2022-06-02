@@ -34,8 +34,11 @@ public class Passenger {
         Ticket = (dataItem[8]);
         Fare = Double.valueOf(dataItem[9]);
         Cabin = (dataItem[10]);
-        Embarked = (dataItem[11]);
-
+        if (dataItem.length>11) {
+            Embarked = (dataItem[11]);
+        } else {
+            Embarked = "";
+        }
     }
 
     public  String getFormattedName(String name) {
@@ -75,5 +78,101 @@ public class Passenger {
             }
 
         } return stringsNew;
+    }
+
+    public int getPassengerId() {
+        return PassengerId;
+    }
+
+    public void setPassengerId(int passengerId) {
+        PassengerId = passengerId;
+    }
+
+    public boolean isSurvived() {
+        return Survived;
+    }
+
+    public void setSurvived(boolean survived) {
+        Survived = survived;
+    }
+
+    public int getPclass() {
+        return Pclass;
+    }
+
+    public void setPclass(int pclass) {
+        Pclass = pclass;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public boolean isSex() {
+        return Sex;
+    }
+
+    public void setSex(boolean sex) {
+        Sex = sex;
+    }
+
+    public String getAge() {
+        return Age;
+    }
+
+    public void setAge(String age) {
+        Age = age;
+    }
+
+    public String getSibSp() {
+        return SibSp;
+    }
+
+    public void setSibSp(String sibSp) {
+        SibSp = sibSp;
+    }
+
+    public int getParch() {
+        return Parch;
+    }
+
+    public void setParch(int parch) {
+        Parch = parch;
+    }
+
+    public String getTicket() {
+        return Ticket;
+    }
+
+    public void setTicket(String ticket) {
+        Ticket = ticket;
+    }
+
+    public Double getFare() {
+        return Fare;
+    }
+
+    public void setFare(Double fare) {
+        Fare = fare;
+    }
+
+    public String getCabin() {
+        return Cabin;
+    }
+
+    public void setCabin(String cabin) {
+        Cabin = cabin;
+    }
+
+    public String getEmbarked() {
+        return Embarked;
+    }
+
+    public void setEmbarked(String embarked) {
+        Embarked = embarked;
     }
 }
