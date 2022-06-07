@@ -1,17 +1,19 @@
 
 
+
+
 import javax.swing.*;
-import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class MainPanel extends JPanel {
     private Passenger passengerObject;
     private List<Passenger> passengerList ;
-    private JComboBox<String> survivedComboBox;
+    private JComboBox<String> passengerPClass;
     private JComboBox<String> passengerSexBox ;
     private JComboBox<String> passengerEmbarkedBox;
     private JTextField passengerIDMax ;
@@ -32,6 +34,7 @@ public class MainPanel extends JPanel {
         this.setBounds(x, y + Constants.MARGIN_FROM_TOP, width, height);
         createPassengerList(fileOfCsv);
         allUserFilter();
+        filterPassengerClass();
 
     }
 
@@ -41,9 +44,13 @@ public class MainPanel extends JPanel {
         JLabel passengerClassLabel = new JLabel("Passenger Class: ");
         passengerClassLabel.setBounds(5, 0, 150 , 30);//שינוי שם למחלקת נוסע
         this.add(passengerClassLabel);
-        this.survivedComboBox = new JComboBox<>(Constants.PASSENGER_CLASS_OPTIONS);
-        this.survivedComboBox.setBounds(135,0, Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
-        this.add(this.survivedComboBox);
+        this.passengerPClass = new JComboBox<>(Constants.PASSENGER_CLASS_OPTIONS);
+        this.passengerPClass.setBounds(135,0, Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
+        this.add(this.passengerPClass);
+        this.passengerPClass.addActionListener(e ->{
+//            this.classType = this.passengerPClass.getSelectedIndex();
+
+                });
 
         JLabel passengerSex = new JLabel("Passenger Sex: ");
         passengerSex.setBounds(5, -10, 100, 130);//שינוי שם למחלקת נוסע
@@ -143,9 +150,25 @@ public class MainPanel extends JPanel {
 //    private List<Passenger> passengerList = new ArrayList<>();
 
 
-    public void filterPassengerClass(Passenger passenger){
+    public void filterPassengerClass(){
         //סינון לפי מחלקה מתודה :
+        List<Passenger> listPClass1 = listPClass1 = passengerList.stream().filter(passenger1 -> passenger1.getPclass() == 1).collect(Collectors.toList());
+        List<Passenger> listPClass2 = listPClass2 = passengerList.stream().filter(passenger1 -> passenger1.getPclass() == 2).collect(Collectors.toList());
+        List<Passenger> listPClass3 =listPClass3 = passengerList.stream().filter(passenger1 -> passenger1.getPclass() == 3).collect(Collectors.toList());
 
+//        for (int i = 0; i < passengerList.size()-1; i++) {
+//            pClass = passengerList.get(i).getPclass();
+//            if(pClass == 1){
+//                listPClass1 = passengerList.stream().filter(passenger1 -> passenger1.getPclass() == 1).collect(Collectors.toList());
+//            }if(pClass == 2){
+//                listPClass1 = passengerList.stream().filter(passenger1 -> passenger1.getPclass() == 2).collect(Collectors.toList());
+//
+//            }
+//            System.out.println(listPClass1.get(i).toString());
+////            if (pClass == 1){
+////
+////            }
+//        }
 
 
 
