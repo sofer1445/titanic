@@ -1,12 +1,16 @@
+
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class MainPanel extends JPanel {
-
+    private Passenger passengerObject;
+    private List<Passenger> passengerList ;
     private JComboBox<String> survivedComboBox;
     private JComboBox<String> passengerSexBox ;
     private JComboBox<String> passengerEmbarkedBox;
@@ -21,6 +25,18 @@ public class MainPanel extends JPanel {
     private JTextField passengerCabin ; // מספר תא
     private JButton searchButton ;
 
+    public MainPanel (int x, int y, int width, int height) {
+
+        File fileOfCsv = new File(Constants.PATH_TO_DATA_FILE);
+        this.setLayout(null);
+        this.setBounds(x, y + Constants.MARGIN_FROM_TOP, width, height);
+        createPassengerList(fileOfCsv);
+        allUserFilter();
+
+    }
+
+
+
     public void allUserFilter (){
         JLabel passengerClassLabel = new JLabel("Passenger Class: ");
         passengerClassLabel.setBounds(5, 0, 150 , 30);//שינוי שם למחלקת נוסע
@@ -28,6 +44,7 @@ public class MainPanel extends JPanel {
         this.survivedComboBox = new JComboBox<>(Constants.PASSENGER_CLASS_OPTIONS);
         this.survivedComboBox.setBounds(135,0, Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
         this.add(this.survivedComboBox);
+
         JLabel passengerSex = new JLabel("Passenger Sex: ");
         passengerSex.setBounds(5, -10, 100, 130);//שינוי שם למחלקת נוסע
         this.add(passengerSex);
@@ -125,33 +142,45 @@ public class MainPanel extends JPanel {
 
 //    private List<Passenger> passengerList = new ArrayList<>();
 
-    public MainPanel (int x, int y, int width, int height) {
 
-        File file = new File(Constants.PATH_TO_DATA_FILE);
-        this.setLayout(null);
-        this.setBounds(x, y + Constants.MARGIN_FROM_TOP, width, height);
+    public void filterPassengerClass(Passenger passenger){
+        //סינון לפי מחלקה מתודה :
 
 
+
+
+
+
+    }
+    private void createPassengerList(File file) {
+        int index = 0;
+        String lineData;
+        this.passengerList = new ArrayList<>();
         try {
-            Scanner scanner = new Scanner(file);
-            List<Passenger> passengerList = new ArrayList<>();
-            int index = 0;
-            while (scanner.hasNextLine()) {
-                String passenger = scanner.nextLine();
-                if (index != 0) {
-                    Passenger passengerObject = new Passenger(passenger);
-//                    passengerList.add(passengerObject);
+            if (file.exists()) {
+                Scanner scanner = new Scanner(file);
+                while (scanner.hasNextLine()) {
+                    lineData = scanner.nextLine();
+                    if(index != 0) {
+                        Passenger passenger = new Passenger(lineData);
+                        this.passengerList.add(passenger);
+                    }else {
+                        index++;
+                    }
                 }
-                index++;
             }
-            allUserFilter();
-        } catch (Exception e) { //כל חריגה זה קופץ (כי לא הצלחתי להתגבר על הגלישה)
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 
+
+
+
+
 //    public List<String> getPasClass(List<Passenger> passengers){
-//
+//    import com.gembox.spreadsheet.SpreadsheetInfo;
+
 
 
 

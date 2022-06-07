@@ -1,43 +1,43 @@
 public class Passenger {
     private int PassengerId;
-    private boolean Survived;
-    private int Pclass;
+    private boolean survived;
+    private int pclass;
     private String name;
-    private boolean Sex;
-    private String Age;
-    private String SibSp;
-    private int Parch;
-    private String Ticket;
-    private Double Fare;
-    private String Cabin;
-    private String Embarked;
+    private boolean sex;
+    private String age;
+    private String sibSp;
+    private int parch;
+    private String ticket;
+    private Double fare;
+    private String cabin;
+    private String embarked;
 
     public Passenger(String lineData) {
         String[] dataItem = lineData.split(",");
         dataItem = toFixArrayStr(dataItem);
         PassengerId = Integer.valueOf(dataItem[0]);
         if(dataItem[1].equals("1")){
-            Survived  = true;
+            survived = true;
         }else {
-            Survived = false;
+            survived = false;
         }
-        Pclass = Integer.valueOf(dataItem[2]);
+        pclass = Integer.valueOf(dataItem[2]);
         name = dataItem[3];
         if(dataItem[4] == ("male")){
-            Sex = true ;
+            sex = true ;
         }else {
-            Sex = false;
+            sex = false;
         }
-        Age = (dataItem[5]);
-        SibSp = (dataItem[6]);
-        Parch = Integer.valueOf(dataItem[7]);
-        Ticket = (dataItem[8]);
-        Fare = Double.valueOf(dataItem[9]);
-        Cabin = (dataItem[10]);
+        age = (dataItem[5]);
+        sibSp = (dataItem[6]);
+        parch = Integer.valueOf(dataItem[7]);
+        ticket = (dataItem[8]);
+        fare = Double.valueOf(dataItem[9]);
+        cabin = (dataItem[10]);
         if (dataItem.length>11) {
-            Embarked = (dataItem[11]);
+            embarked = (dataItem[11]);
         } else {
-            Embarked = "";
+            embarked = "";
         }
     }
 
@@ -89,19 +89,19 @@ public class Passenger {
     }
 
     public boolean isSurvived() {
-        return Survived;
+        return survived;
     }
 
     public void setSurvived(boolean survived) {
-        Survived = survived;
+        this.survived = survived;
     }
 
     public int getPclass() {
-        return Pclass;
+        return pclass;
     }
 
     public void setPclass(int pclass) {
-        Pclass = pclass;
+        pclass = pclass;
     }
 
     public String getName() {
@@ -113,66 +113,84 @@ public class Passenger {
     }
 
     public boolean isSex() {
-        return Sex;
+        return sex;
     }
 
     public void setSex(boolean sex) {
-        Sex = sex;
+        this.sex = sex;
     }
 
     public String getAge() {
-        return Age;
+        return age;
     }
 
     public void setAge(String age) {
-        Age = age;
+        this.age = age;
     }
 
     public String getSibSp() {
-        return SibSp;
+        return sibSp;
     }
 
     public void setSibSp(String sibSp) {
-        SibSp = sibSp;
+        this.sibSp = sibSp;
     }
 
     public int getParch() {
-        return Parch;
+        return parch;
     }
 
     public void setParch(int parch) {
-        Parch = parch;
+        this.parch = parch;
     }
 
     public String getTicket() {
-        return Ticket;
+        return ticket;
     }
 
     public void setTicket(String ticket) {
-        Ticket = ticket;
+        this.ticket = ticket;
     }
 
     public Double getFare() {
-        return Fare;
+        return fare;
     }
 
     public void setFare(Double fare) {
-        Fare = fare;
+        this.fare = fare;
     }
 
     public String getCabin() {
-        return Cabin;
+        return cabin;
     }
 
     public void setCabin(String cabin) {
-        Cabin = cabin;
+        this.cabin = cabin;
     }
 
     public String getEmbarked() {
-        return Embarked;
+        return embarked;
     }
 
     public void setEmbarked(String embarked) {
-        Embarked = embarked;
+        this.embarked = embarked;
+    }
+
+    @Override
+    public String toString() {
+        return "Passenger{" +
+                "PassengerId=" + PassengerId +
+                ", survived=" + survived +
+                ", pclass=" + pclass +
+                ", name='" + name + '\'' +
+                ", sex=" + sex +
+                ", age='" + age + '\'' +
+                ", sibSp='" + sibSp + '\'' +
+                ", parch=" + parch +
+                ", ticket='" + ticket + '\'' +
+                ", fare=" + fare +
+                ", cabin='" + cabin + '\'' +
+                ", embarked='" + embarked + '\'' +
+                '}';
     }
 }
