@@ -1,5 +1,5 @@
 public class Passenger {
-    private int PassengerId;
+    private int passengerId;
     private boolean survived;
     private int pclass;
     private String name;
@@ -15,7 +15,7 @@ public class Passenger {
     public Passenger(String lineData) {
         String[] dataItem = lineData.split(",");
         dataItem = toFixArrayStr(dataItem);
-        PassengerId = Integer.valueOf(dataItem[0]);
+        passengerId = Integer.valueOf(dataItem[0]);
         if(dataItem[1].equals("1")){
             survived = true;
         }else {
@@ -81,13 +81,16 @@ public class Passenger {
     }
 
     public int getPassengerId() {
-        return PassengerId;
+        return passengerId;
     }
 
     public void setPassengerId(int passengerId) {
-        PassengerId = passengerId;
+        if (passengerId > 0 && passengerId < 892) {
+            this.passengerId = passengerId;
+        } else {
+            this.passengerId = 0;
+        }
     }
-
     public boolean isSurvived() {
         return survived;
     }
@@ -157,7 +160,11 @@ public class Passenger {
     }
 
     public void setFare(Double fare) {
-        this.fare = fare;
+        if (fare < 93.5 && fare >= 0) {
+            this.fare = fare;
+        }else {
+            this.fare = -1.0;
+        }
     }
 
     public String getCabin() {
@@ -179,7 +186,7 @@ public class Passenger {
     @Override
     public String toString() {
         return "Passenger{" +
-                "PassengerId=" + PassengerId +
+                "PassengerId=" + passengerId +
                 ", survived=" + survived +
                 ", pclass=" + pclass +
                 ", name='" + name + '\'' +
