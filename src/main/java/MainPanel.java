@@ -44,7 +44,7 @@ public class MainPanel extends JPanel {
         this.passengerPClass.addActionListener(e -> {
             String typeClass = (String) passengerPClass.getSelectedItem();
             try {
-                this.passengerList = filterPassengerClass(typeClass);
+                filterPassengerClass(typeClass);
                 genderFiltering("male", passengerList);
             } catch (IOException ex) {
                 ex.printStackTrace();
@@ -152,22 +152,20 @@ public class MainPanel extends JPanel {
 //    private List<Passenger> passengerList = new ArrayList<>();
 
 
-    public List<Passenger> filterPassengerClass(String str) throws IOException {
+    public void filterPassengerClass(String str) throws IOException {
         System.out.println("filterPassengerClass: start");
         //סינון לפי מחלקה מתודה :
-        List<Passenger> listAfterFiltering = null;
         switch (str) {
             case "1st":
-                listAfterFiltering = passengerList.stream().filter(passenger1 -> passenger1.getPclass() == 1).collect(Collectors.toList());
+                this.passengerList = passengerList.stream().filter(passenger1 -> passenger1.getPclass() == 1).collect(Collectors.toList());
                 break;
             case "2nd":
-                listAfterFiltering = passengerList.stream().filter(passenger1 -> passenger1.getPclass() == 2).collect(Collectors.toList());
+                this.passengerList = passengerList.stream().filter(passenger1 -> passenger1.getPclass() == 2).collect(Collectors.toList());
                 break;
             case "3rd":
-                listAfterFiltering = passengerList.stream().filter(passenger1 -> passenger1.getPclass() == 3).collect(Collectors.toList());
+                this.passengerList = passengerList.stream().filter(passenger1 -> passenger1.getPclass() == 3).collect(Collectors.toList());
                 break;
             case "All":
-                listAfterFiltering = passengerList;
                 break;
         }
         try {
@@ -175,14 +173,14 @@ public class MainPanel extends JPanel {
             FileWriter fileWriter = new FileWriter(output);
             PrintWriter printWriter = new PrintWriter(fileWriter);
             printWriter.println("PassengerId,Survived,Pclass,Name,Sex,Age,SibSp,Parch,Ticket,Fare,Cabin,Embarked");
-            for (int i = 1; i < listAfterFiltering.size(); i++) {
-                printWriter.println(listAfterFiltering.get(i));
+            for (int i = 1; i < this.passengerList.size(); i++) {
+                printWriter.println(this.passengerList.get(i));
             }
             printWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return listAfterFiltering;
+
     }
 
     private void createPassengerList(File file) {
