@@ -1,12 +1,14 @@
+import javax.swing.*;
+
 public class Passenger {
     private int passengerId;
     private boolean survived;
     private int pclass;
     private String name;
-    private boolean sex;
+    private String sex;
     private String age;
     private String sibSp;
-    private int parch;
+    private String parch;
     private String ticket;
     private Double fare;
     private String cabin;
@@ -15,32 +17,39 @@ public class Passenger {
     public Passenger(String lineData) {
         String[] dataItem = lineData.split(",");
         dataItem = toFixArrayStr(dataItem);
-        passengerId = Integer.valueOf(dataItem[0]);
-        if(dataItem[1].equals("1")){
-            survived = true;
-        }else {
-            survived = false;
+
+        passengerId = Integer.parseInt(dataItem[0]);
+        switch (dataItem[1]){
+            case "1":
+                survived = true;
+                break;
+            case "0":
+                survived = false;
+
         }
-        pclass = Integer.valueOf(dataItem[2]);
+//        survived = dataItem[1].equals("1");
+        pclass = Integer.parseInt(dataItem[2]);
         name = dataItem[3];
-        if(dataItem[4] == ("male")){
-            sex = true ;
-        }else {
-            sex = false;
-        }
+        sex = dataItem[4];
+//        if (dataItem[4].equals("male")) {
+//            sex = "male";
+//        }
+//        if (dataItem[4].equals("female")) {
+//            sex = "female";
+//        }
         age = (dataItem[5]);
-        sibSp = (dataItem[6]);
-        parch = Integer.valueOf(dataItem[7]);
+        sibSp = dataItem[6];
+        parch = dataItem[7];
         ticket = (dataItem[8]);
-        fare = Double.valueOf(dataItem[9]);
+        fare = Double.parseDouble(dataItem[9]);
         cabin = (dataItem[10]);
-        if (dataItem.length>11) {
+        if (dataItem.length > 11 ) {
             embarked = (dataItem[11]);
         } else {
             embarked = "";
         }
-    }
 
+    }
     public  String getFormattedName(String name) {
         String fixName ;
         String lastName = " ";
@@ -73,8 +82,8 @@ public class Passenger {
                 str[i] = getFormattedName(str[i] +","+ str[i+1]);
             }
             if(i != 4){
-               stringsNew[counter] = str[i];
-               counter++;
+                stringsNew[counter] = str[i];
+                counter++;
             }
 
         } return stringsNew;
@@ -104,7 +113,7 @@ public class Passenger {
     }
 
     public void setPclass(int pclass) {
-        pclass = pclass;
+        this.pclass = pclass;
     }
 
     public String getName() {
@@ -115,11 +124,11 @@ public class Passenger {
         this.name = name;
     }
 
-    public boolean isSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(boolean sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 
@@ -135,16 +144,16 @@ public class Passenger {
         return sibSp;
     }
 
-    public void setSibSp(String sibSp) {
-        this.sibSp = sibSp;
+    public void setSibSp(int sibSp) {
+        this.sibSp = String.valueOf(sibSp);
     }
 
-    public int getParch() {
+    public String getParch() {
         return parch;
     }
 
     public void setParch(int parch) {
-        this.parch = parch;
+        this.parch = String.valueOf(parch);
     }
 
     public String getTicket() {
@@ -183,6 +192,39 @@ public class Passenger {
         this.embarked = embarked;
     }
 
+//    public boolean isIdInRange(int min, int max) {
+//        boolean isInRange = false;
+//        if (this.passengerId >= min && this.passengerId <= max) {
+//            isInRange = true;
+//        }
+//        return isInRange;
+//    }
+
+//    public boolean numberSibSp (int num) {
+//        return num >= 0 && num <= 8;
+//    }
+//
+//    public boolean numberPranch (int num) {
+//        return num >= 0 && num <= 6;
+//    }
+//
+//    public boolean sameTicket (String ticket){ //מאביחי
+//        return this.ticket.equals(ticket);
+//    }
+
+//    public boolean rangeFareTicket (double min, double max) { //מאביחי
+//        if (min == 0 && max > 0) {
+//            return this.fare <= max;
+//        } else if (min > 0 && max == 0) {
+//            return this.fare >= min;
+//        } else if (min > 0 && max > 0 && max > min) {
+//            return this.fare >= min && this.fare < max;
+//        } else if (min == max && min != 0) {
+//            return this.fare == max;
+//        }
+//        return true;
+//    }
+
     @Override
     public String toString() {
         return "Passenger{" +
@@ -197,7 +239,7 @@ public class Passenger {
                 ", ticket='" + ticket + '\'' +
                 ", fare=" + fare +
                 ", cabin='" + cabin + '\'' +
-                ", embarked='" + embarked + '\'' +
-                '}';
+                embarked;
     }
+
 }

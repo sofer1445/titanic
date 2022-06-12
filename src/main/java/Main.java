@@ -1,15 +1,16 @@
 import javax.swing.*;
 import java.io.FileReader;
+import java.io.IOException;
 
 class Main extends JFrame {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         new Main();
 
     }
 
 
-    public Main() {
+    public Main() throws IOException {
         this.setTitle("Titanic Passengers Data");
         this.setLayout(null);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
