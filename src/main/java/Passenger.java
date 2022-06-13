@@ -6,7 +6,7 @@ public class Passenger {
     private int pclass;
     private String name;
     private String sex;
-    private String age;
+    private double age;
     private String sibSp;
     private String parch;
     private String ticket;
@@ -32,13 +32,11 @@ public class Passenger {
         pclass = Integer.parseInt(dataItem[2]);
         name = dataItem[3];
         sex = dataItem[4];
-//        if (dataItem[4].equals("male")) {
-//            sex = "male";
-//        }
-//        if (dataItem[4].equals("female")) {
-//            sex = "female";
-//        }
-        age = (dataItem[5]);
+        if(dataItem[5] == null || dataItem[5].isEmpty()){
+            age = 0;
+        }else {
+            age = Double.parseDouble(dataItem[5]);
+        }
         sibSp = dataItem[6];
         parch = dataItem[7];
         ticket = (dataItem[8]);
@@ -137,11 +135,11 @@ public class Passenger {
         this.sex = sex;
     }
 
-    public String getAge() {
+    public double getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    public void setAge(double age) {
         this.age = age;
     }
 

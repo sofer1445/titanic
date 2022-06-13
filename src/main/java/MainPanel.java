@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 public class MainPanel extends JPanel {
     private List<Passenger> passengerList;
+    private List<Passenger> includingAge;
     private JComboBox<String> passengerPClass;
     private JComboBox<String> passengerSexBox;
     private JComboBox<String> passengerEmbarkedBox;
@@ -41,8 +42,17 @@ public class MainPanel extends JPanel {
         this.setLayout(null);
         this.setBounds(x, y + Constants.MARGIN_FROM_TOP, width, height);
         createPassengerList(fileOfCsv);
+        this.includingAge = this.passengerList;
         allUserFilter();
 
+    }
+
+    public List<Passenger> getPassengerList() {
+        return passengerList;
+    }
+
+    public void setPassengerList(List<Passenger> passengerList) {
+        this.passengerList = passengerList;
     }
 
     public void allUserFilter() throws IOException {
@@ -182,8 +192,6 @@ public class MainPanel extends JPanel {
     }
 
 
-
-
     public void filterPassengerClass(String str) throws IOException {
         System.out.println("filterPassengerClass: start");
         //סינון לפי מחלקה מתודה :
@@ -286,7 +294,7 @@ public class MainPanel extends JPanel {
         if (!maxId.isEmpty()) {
             finalMaxId = Integer.parseInt(maxId);
         } else {
-            finalMaxId = this.passengerList.size();
+            finalMaxId = Constants.MAX_INDEX_LIST;
         }
 
         this.passengerList = passengerList.stream().filter(passenger -> (passenger.getPassengerId() <= finalMaxId && passenger.getPassengerId() >= finalMinId)).collect(Collectors.toList());
@@ -346,7 +354,7 @@ public class MainPanel extends JPanel {
         if (!maxFare.isEmpty()) {
             finalMaxFare = Double.parseDouble(maxFare);
         } else {
-            finalMaxFare = 93.5; // לעשות פינל של מחיר מקסימלי
+            finalMaxFare = 512.3292; // לעשות פינל של מחיר מקסימלי
         }
         this.passengerList = passengerList.stream().filter(passenger -> passenger.getFare() <= finalMaxFare && passenger.getFare() >= finalMinFare).collect(Collectors.toList());
 
@@ -365,28 +373,32 @@ public class MainPanel extends JPanel {
 
     }
 
-    public void survivedFilter(){
+    public void survivedFilter() {
         System.out.println("survivedFilter: srart");
         String rows = "Total Rows: ";
-        List<Passenger> passengerListNew ;
+        List<Passenger> passengerListNew;
         int live = 0;
         int dead = 0;
-        if(!this.passengerList.isEmpty()){
-            passengerListNew = this.passengerList.stream().filter(passenger -> passenger.isSurvived() == true).collect(Collectors.toList());
+        if (!this.passengerList.isEmpty()) {
+            passengerListNew = this.passengerList.stream().filter(Passenger::isSurvived).collect(Collectors.toList());
             live = passengerListNew.size();
-            passengerListNew = this.passengerList.stream().filter(passenger -> passenger.isSurvived() == false).collect(Collectors.toList());
+            passengerListNew = this.passengerList.stream().filter(passenger -> !passenger.isSurvived()).collect(Collectors.toList());
             dead = passengerListNew.size();
 
         }
-        rows += live+dead +" ("+ live +" survived," + dead + " did not)";
+        rows += live + dead + " (" + live + " survived," + dead + " did not)";
         System.out.println(rows);
     }
+
+    public List<Passenger> ageFilter(double ageMax, double ageMin, List<Passenger> list) {
+        System.out.println("ageFilter: start");
+        if (!list.isEmpty()) {
+            list = list.stream().filter(passenger -> (passenger.getAge() <= ageMax && passenger.getAge() >= ageMin)).collect(Collectors.toList());
+
+        }
+        return list;
+    }
 }
-
-
-
-
-//Total Rows: 25 (19 survived, 6 did not)
 
 
 //    public List<String> getPasClass(List<Passenger> passengers){
