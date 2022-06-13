@@ -15,9 +15,10 @@ public class Passenger {
     private String embarked;
 
     public Passenger(String lineData) {
+//        String original = lineData;
+//        System.out.println(original);
         String[] dataItem = lineData.split(",");
         dataItem = toFixArrayStr(dataItem);
-
         passengerId = Integer.parseInt(dataItem[0]);
         switch (dataItem[1]){
             case "1":
@@ -42,16 +43,20 @@ public class Passenger {
         parch = dataItem[7];
         ticket = (dataItem[8]);
         fare = Double.parseDouble(dataItem[9]);
-        cabin = (dataItem[10]);
-        if (dataItem.length > 11 ) {
-            embarked = (dataItem[11]);
+        if(dataItem[10] == null){
+            cabin = "";
+        }else {
+            cabin = (dataItem[10]);
+        }
+        if (dataItem.length < 12 ) {
+            this.embarked = "";
         } else {
-            embarked = "";
+            this.embarked = (dataItem[11]);
         }
 
     }
     public  String getFormattedName(String name) {
-        String fixName ;
+        String fixName;
         String lastName = " ";
         String firstName = "";
         for (int i = 0; i < name.length() - 1; i++) {
@@ -77,7 +82,7 @@ public class Passenger {
     public String[] toFixArrayStr(String[] str){
         String[] stringsNew = new String[str.length-1];
         int counter = 0;
-        for (int i = 0; i < str.length-1; i++) {
+        for (int i = 0; i < str.length; i++) {
             if(i == 3){
                 str[i] = getFormattedName(str[i] +","+ str[i+1]);
             }
