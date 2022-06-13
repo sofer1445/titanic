@@ -7,7 +7,6 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class MainPanel extends JPanel {
-    //    private Passenger passengerObject;
     private List<Passenger> passengerList;
     private JComboBox<String> passengerPClass;
     private JComboBox<String> passengerSexBox;
@@ -44,9 +43,7 @@ public class MainPanel extends JPanel {
         createPassengerList(fileOfCsv);
         allUserFilter();
 
-
     }
-
 
     public void allUserFilter() throws IOException {
         JLabel passengerClassLabel = new JLabel("Passenger Class: ");
@@ -55,15 +52,7 @@ public class MainPanel extends JPanel {
         this.passengerPClass = new JComboBox<>(Constants.PASSENGER_CLASS_OPTIONS);
         this.passengerPClass.setBounds(135, 0, Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
         this.add(this.passengerPClass);
-//        this.passengerPClass.addActionListener(e -> {
-////            try {
-////                typeClassOfClass = (String) passengerPClass.getSelectedItem();
-////            } catch (Exception exception1) {
-////                System.out.println(exception1);
-////            }
-//
-//
-//        });
+
 
         JLabel passengerSex = new JLabel("Passenger Sex: ");
         passengerSex.setBounds(5, -10, 100, 130);//שינוי שם למחלקת נוסע
@@ -71,15 +60,6 @@ public class MainPanel extends JPanel {
         this.passengerSexBox = new JComboBox<>(Constants.SEX_PASSENGER);
         this.passengerSexBox.setBounds(135, 40, 80, 30);
         this.add(this.passengerSexBox);
-//        this.passengerSexBox.addActionListener(e -> {
-////            try {
-////                typeClassOfSex = (String) passengerSexBox.getSelectedItem();
-////            } catch (Exception exception1) {
-////                System.out.println(exception1);
-////            }
-//
-//
-//        });
 
         JLabel passengerEmbarked = new JLabel("Passenger Embarked: ");
         passengerEmbarked.setBounds(5, 30, 140, 130);//שינוי שם למחלקת נוסע
@@ -87,15 +67,6 @@ public class MainPanel extends JPanel {
         this.passengerEmbarkedBox = new JComboBox<>(Constants.Embarked);
         this.passengerEmbarkedBox.setBounds(135, 80, 80, 30);
         this.add(this.passengerEmbarkedBox);
-//        this.passengerEmbarkedBox.addActionListener(e -> {
-////            try {
-////                typeClassOfEmbarked = (String) passengerEmbarkedBox.getSelectedItem();
-////            } catch (Exception exception1) {
-////                System.out.println(exception1);
-////            }
-//
-//
-//        });
 
 
         JLabel passengerIDMin = new JLabel("Passenger ID MIN: ");
@@ -104,14 +75,7 @@ public class MainPanel extends JPanel {
         this.passengerIDMinim = new JTextField("");
         this.passengerIDMinim.setBounds(135, 120, 80, 30);
         this.add(this.passengerIDMinim);
-//        this.passengerIDMinim.addActionListener(e -> {
-////            try {
-////                this.minId = passengerIDMinim.getText();
-////            } catch (Exception exception1) {
-////                System.out.println(exception1);
-////            }
-//
-//        });
+
 
         JLabel passengerIDMax = new JLabel("Passenger ID MAX: ");
         passengerIDMax.setBounds(5, 110, 140, 130);//שינוי שם למחלקת נוסע
@@ -119,15 +83,6 @@ public class MainPanel extends JPanel {
         this.passengerIDMaxim = new JTextField("");
         this.passengerIDMaxim.setBounds(135, 160, 80, 30);
         this.add(this.passengerIDMaxim);
-//        this.passengerIDMaxim.addActionListener(e -> {
-////            try {
-////                this.maxId = passengerIDMaxim.getText();
-////            }catch (Exception exception){
-////                System.out.println(exception);
-////            }
-//
-//
-//        });
 
 
         JLabel passengerName = new JLabel("Passenger Name: ");
@@ -136,15 +91,6 @@ public class MainPanel extends JPanel {
         this.passengersNames = new JTextField("");
         this.passengersNames.setBounds(135, 200, 80, 30);
         this.add(this.passengersNames);
-//        this.passengersNames.addActionListener(e -> {
-////            try {
-////               this.name = this.passengersNames.getText();
-////            }catch (Exception exception){
-////                System.out.println(exception);
-////            }
-//
-//
-//        });
 
 
         JLabel passengerSibSp = new JLabel("Passenger Sib&Sp: ");
@@ -153,13 +99,6 @@ public class MainPanel extends JPanel {
         this.passengerSibAndSp = new JTextField("");
         this.passengerSibAndSp.setBounds(135, 240, 80, 30);
         this.add(this.passengerSibAndSp);
-//        this.passengerSibAndSp.addActionListener(e -> {
-////            try{
-////                sibSp = passengerSibAndSp.getText();
-////            }catch (Exception exception){
-////                System.out.println(exception);
-////            }
-//        });
 
         JLabel passengerPrach = new JLabel("Passenger Prach: ");
         passengerPrach.setBounds(5, 230, 140, 130);//שינוי שם למחלקת נוסע
@@ -167,15 +106,6 @@ public class MainPanel extends JPanel {
         this.passengerPraAndCh = new JTextField("");
         this.passengerPraAndCh.setBounds(135, 280, 80, 30);
         this.add(this.passengerPraAndCh);
-//        this.passengerPraAndCh.addActionListener(e -> {
-////            try{
-////                prach = passengerPraAndCh.getText();
-////            }catch (Exception e1){
-////                System.out.println(e1);
-////            }
-//
-//
-//        });
 
 
         JLabel passengerTicket = new JLabel("Passenger Ticket: ");
@@ -184,14 +114,7 @@ public class MainPanel extends JPanel {
         this.passengerTickets = new JTextField("");
         this.passengerTickets.setBounds(135, 320, 80, 30);
         this.add(this.passengerTickets);
-//        this.passengerTickets.addActionListener(e -> {
-////            try{
-////                ticket = passengerTickets.getText();
-////            }catch (Exception exception){
-////                System.out.println(exception);
-////            }
-//
-//        });
+
 
         JLabel passengerFareMax = new JLabel("Passenger Max Fare: ");
         passengerFareMax.setBounds(5, 310, 140, 130);//שינוי שם למחלקת נוסע
@@ -199,13 +122,7 @@ public class MainPanel extends JPanel {
         this.passengerFareMaxim = new JTextField("");
         this.passengerFareMaxim.setBounds(135, 360, 80, 30);
         this.add(this.passengerFareMaxim);
-//        this.passengerFareMaxim.addActionListener(e -> {
-////            try {
-////                this.maxFare = passengerFareMaxim.getText();
-////            } catch (Exception exception) {
-////                System.out.println(exception);
-////            }
-//        });
+
 
         JLabel passengerFareMin = new JLabel("Passenger Min Fare: ");
         passengerFareMin.setBounds(5, 350, 140, 130);//שינוי שם למחלקת נוסע
@@ -213,13 +130,6 @@ public class MainPanel extends JPanel {
         this.passengerFareMinim = new JTextField("");
         this.passengerFareMinim.setBounds(135, 400, 80, 30);
         this.add(this.passengerFareMinim);
-//        this.passengerFareMinim.addActionListener(e -> {
-////            try {
-////                this.minFare = passengerFareMinim.getText();
-////            } catch (Exception exception) {
-////                System.out.println(exception);
-////            }
-//        });
 
 
         JLabel passengerCabin = new JLabel("Passenger Cabin: ");
@@ -228,15 +138,6 @@ public class MainPanel extends JPanel {
         this.passengerCabins = new JTextField("");
         this.passengerCabins.setBounds(135, 440, 80, 30);
         this.add(this.passengerCabins);
-//        this.passengerCabins.addActionListener(e -> {
-////            try{
-////                cabins = passengerCabins.getText();
-////            }catch (Exception exception){
-////                System.out.println(exception);
-////            }
-//
-//
-//        });
 
 
         this.searchButton = new JButton("Search Button");
@@ -245,18 +146,18 @@ public class MainPanel extends JPanel {
 
         this.searchButton.addActionListener(e -> {
             try {
-                typeClassOfClass = (String) passengerPClass.getSelectedItem();
-                typeClassOfSex = (String) passengerSexBox.getSelectedItem();
-                typeClassOfEmbarked = (String) passengerEmbarkedBox.getSelectedItem();
+                this.typeClassOfClass = (String) passengerPClass.getSelectedItem();
+                this.typeClassOfSex = (String) passengerSexBox.getSelectedItem();
+                this.typeClassOfEmbarked = (String) passengerEmbarkedBox.getSelectedItem();
                 this.minId = passengerIDMinim.getText();
                 this.maxId = passengerIDMaxim.getText();
-                this.name = this.passengersNames.getText();
-                sibSp = passengerSibAndSp.getText();
-                prach = passengerPraAndCh.getText();
-                ticket = passengerTickets.getText();
+                this.name = passengersNames.getText();
+                this.sibSp = passengerSibAndSp.getText();
+                this.prach = passengerPraAndCh.getText();
+                this.ticket = passengerTickets.getText();
                 this.maxFare = passengerFareMaxim.getText();
                 this.minFare = passengerFareMinim.getText();
-                cabins = passengerCabins.getText();
+                this.cabins = passengerCabins.getText();
 
                 filterPassengerClass(typeClassOfClass);
                 genderFiltering(typeClassOfSex);
@@ -269,7 +170,7 @@ public class MainPanel extends JPanel {
                 rangePriceFiltering(minFare, maxFare);
                 filterCabin(cabins);
                 writeToFile();
-                System.out.println(this.passengerList);
+                survivedFilter();
             } catch (IOException ex) {
                 ex.printStackTrace();
 
@@ -281,7 +182,6 @@ public class MainPanel extends JPanel {
     }
 
 
-//    private List<Passenger> passengerList = new ArrayList<>();
 
 
     public void filterPassengerClass(String str) throws IOException {
@@ -464,7 +364,30 @@ public class MainPanel extends JPanel {
         }
 
     }
+
+    public void survivedFilter(){
+        System.out.println("survivedFilter: srart");
+        String rows = "Total Rows: ";
+        List<Passenger> passengerListNew ;
+        int live = 0;
+        int dead = 0;
+        if(!this.passengerList.isEmpty()){
+            passengerListNew = this.passengerList.stream().filter(passenger -> passenger.isSurvived() == true).collect(Collectors.toList());
+            live = passengerListNew.size();
+            passengerListNew = this.passengerList.stream().filter(passenger -> passenger.isSurvived() == false).collect(Collectors.toList());
+            dead = passengerListNew.size();
+
+        }
+        rows += live+dead +" ("+ live +" survived," + dead + " did not)";
+        System.out.println(rows);
+    }
 }
+
+
+
+
+//Total Rows: 25 (19 survived, 6 did not)
+
 
 //    public List<String> getPasClass(List<Passenger> passengers){
 //    import com.gembox.spreadsheet.SpreadsheetInfo;

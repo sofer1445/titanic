@@ -197,53 +197,21 @@ public class Passenger {
         this.embarked = embarked;
     }
 
-//    public boolean isIdInRange(int min, int max) {
-//        boolean isInRange = false;
-//        if (this.passengerId >= min && this.passengerId <= max) {
-//            isInRange = true;
-//        }
-//        return isInRange;
-//    }
 
-//    public boolean numberSibSp (int num) {
-//        return num >= 0 && num <= 8;
-//    }
-//
-//    public boolean numberPranch (int num) {
-//        return num >= 0 && num <= 6;
-//    }
-//
-//    public boolean sameTicket (String ticket){ //מאביחי
-//        return this.ticket.equals(ticket);
-//    }
 
-//    public boolean rangeFareTicket (double min, double max) { //מאביחי
-//        if (min == 0 && max > 0) {
-//            return this.fare <= max;
-//        } else if (min > 0 && max == 0) {
-//            return this.fare >= min;
-//        } else if (min > 0 && max > 0 && max > min) {
-//            return this.fare >= min && this.fare < max;
-//        } else if (min == max && min != 0) {
-//            return this.fare == max;
-//        }
-//        return true;
-//    }
-
-    @Override
     public String toString() {
-        return "Passenger{" +
-                "PassengerId=" + passengerId +
-                ", survived=" + survived +
-                ", pclass=" + pclass +
-                ", name='" + name + '\'' +
-                ", sex=" + sex +
-                ", age='" + age + '\'' +
-                ", sibSp='" + sibSp + '\'' +
-                ", parch=" + parch +
-                ", ticket='" + ticket + '\'' +
-                ", fare=" + fare +
-                ", cabin='" + cabin + '\'' +
+        return "" +
+                 passengerId +
+                "," + survived +
+                "," + pclass +
+                "," + name + '\'' +
+                "," + sex +
+                "," + age + '\'' +
+                "," + sibSp + '\'' +
+                "," + parch +
+                ",'" + ticket + '\'' +
+                "," + fare +
+                "," + cabin + '\'' +
                 embarked;
     }
 
