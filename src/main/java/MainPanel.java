@@ -8,12 +8,13 @@ import java.util.stream.Collectors;
 
 public class MainPanel extends JPanel {
     private List<Passenger> passengerList;
-    private List<Passenger> includingAge;
     private JComboBox<String> passengerPClass;
     private JComboBox<String> passengerSexBox;
     private JComboBox<String> passengerEmbarkedBox;
     private JTextField passengerIDMaxim;
     private JTextField passengerIDMinim;
+    private JTextField passengerAgeMaxim;
+    private JTextField passengerAgeMinim;
     private JTextField passengersNames;
     private JTextField passengerSibAndSp;// אחים ובני זוג
     private JTextField passengerPraAndCh; // ילדים והורים
@@ -22,6 +23,7 @@ public class MainPanel extends JPanel {
     private JTextField passengerFareMinim;
     private JTextField passengerCabins; // מספר תא
     private JButton searchButton;
+    private JButton statistic;
     private String minId;
     private String maxId;
     private String minFare;
@@ -34,6 +36,8 @@ public class MainPanel extends JPanel {
     private String prach;
     private String ticket;
     private String cabins;
+    private String minAge;
+    private String maxAge;
     private int counter = 0;
 
     public MainPanel(int x, int y, int width, int height) throws IOException {
@@ -42,7 +46,6 @@ public class MainPanel extends JPanel {
         this.setLayout(null);
         this.setBounds(x, y + Constants.MARGIN_FROM_TOP, width, height);
         createPassengerList(fileOfCsv);
-        this.includingAge = this.passengerList;
         allUserFilter();
 
     }
@@ -150,35 +153,30 @@ public class MainPanel extends JPanel {
         this.add(this.passengerCabins);
 
 
+        JLabel passengerAgeMin = new JLabel("Passenger AGE MIN: ");
+        passengerAgeMin.setBounds(passengerIDMinim.getWidth() + passengerIDMinim.getX(), 70, 140, 130);
+        this.add(passengerAgeMin);
+        this.passengerAgeMinim = new JTextField("");
+        this.passengerAgeMinim.setBounds(passengerAgeMin.getWidth() + passengerAgeMin.getX(), 120, 80, 30);
+        this.add(this.passengerAgeMinim);
+
+
+        JLabel passengerAgeMax = new JLabel("Passenger AGE MAX: ");
+        passengerAgeMax.setBounds(passengerIDMaxim.getWidth() + passengerIDMaxim.getX(), 110, 140, 130);
+        this.add(passengerAgeMax);
+        this.passengerAgeMaxim = new JTextField("");
+        this.passengerAgeMaxim.setBounds(passengerAgeMax.getWidth() + passengerAgeMax.getX(), 160, 80, 30);
+        this.add(this.passengerAgeMaxim);
+
+
         this.searchButton = new JButton("Search Button");
         this.searchButton.setBounds(80, 480, 180, 50);
         this.add(this.searchButton);
 
         this.searchButton.addActionListener(e -> {
             try {
-                this.typeClassOfClass = (String) passengerPClass.getSelectedItem();
-                this.typeClassOfSex = (String) passengerSexBox.getSelectedItem();
-                this.typeClassOfEmbarked = (String) passengerEmbarkedBox.getSelectedItem();
-                this.minId = passengerIDMinim.getText();
-                this.maxId = passengerIDMaxim.getText();
-                this.name = passengersNames.getText();
-                this.sibSp = passengerSibAndSp.getText();
-                this.prach = passengerPraAndCh.getText();
-                this.ticket = passengerTickets.getText();
-                this.maxFare = passengerFareMaxim.getText();
-                this.minFare = passengerFareMinim.getText();
-                this.cabins = passengerCabins.getText();
-
-                filterPassengerClass(typeClassOfClass);
-                genderFiltering(typeClassOfSex);
-                filterPassengerEmbark(typeClassOfEmbarked);
-                IdRangeFiltering(minId, maxId);
-                findName(name);
-                filterSibSp(sibSp);
-                filterPrach(prach);
-                filterTicket(ticket);
-                rangePriceFiltering(minFare, maxFare);
-                filterCabin(cabins);
+                callInitialization();
+                callFiltering();
                 writeToFile();
                 survivedFilter();
             } catch (IOException ex) {
@@ -187,29 +185,34 @@ public class MainPanel extends JPanel {
             }
 
         });
+        percentageStatistics();
 
 
     }
 
 
-    public void filterPassengerClass(String str) throws IOException {
+    public int filterPassengerClass(String str) throws IOException {
         System.out.println("filterPassengerClass: start");
-        //סינון לפי מחלקה מתודה :
+        int type = 0;
         if (str != null) {
             switch (str) {
                 case "1st":
                     this.passengerList = passengerList.stream().filter(passenger1 -> passenger1.getPclass() == 1).collect(Collectors.toList());
+                    type = 1;
                     break;
                 case "2nd":
                     this.passengerList = passengerList.stream().filter(passenger1 -> passenger1.getPclass() == 2).collect(Collectors.toList());
+                    type = 2;
                     break;
                 case "3rd":
                     this.passengerList = passengerList.stream().filter(passenger1 -> passenger1.getPclass() == 3).collect(Collectors.toList());
+                    type = 3;
                     break;
                 case "All":
                     break;
             }
         }
+        return type;
     }
 
     private void createPassengerList(File file) {
@@ -251,15 +254,22 @@ public class MainPanel extends JPanel {
         }
     }
 
-    public void genderFiltering(String gender) throws IOException {
+    public String genderFiltering(String gender) throws IOException {
         System.out.println("genderFiltering: start");
+        String sexType ;
         if (!gender.isEmpty()) {
             if (gender.equals("male")) {
                 this.passengerList = passengerList.stream().filter(passenger -> passenger.getSex().equals("male")).collect(Collectors.toList());
+                sexType = "male";
+                return sexType;
             } else if (gender.equals("female")) {
                 this.passengerList = passengerList.stream().filter(passenger -> passenger.getSex().equals("female")).collect(Collectors.toList());
+                sexType = "female";
+                return sexType;
             }
         }
+        return gender;
+
     }
 
     public void filterPassengerEmbark(String str) throws IOException {//"All", "C", "Q", "S"
@@ -298,6 +308,24 @@ public class MainPanel extends JPanel {
         }
 
         this.passengerList = passengerList.stream().filter(passenger -> (passenger.getPassengerId() <= finalMaxId && passenger.getPassengerId() >= finalMinId)).collect(Collectors.toList());
+    }
+
+    public void ageFilter(String minAge, String maxAge) {
+        int finalMaxAge;
+        int finalMinAge;
+        if (!minAge.isEmpty()) {
+            finalMinAge = Integer.parseInt(minId);
+        } else {
+            finalMinAge = 0;
+        }
+        if (!maxAge.isEmpty()) {
+            finalMaxAge = Integer.parseInt(maxId);
+        } else {
+            finalMaxAge = 90;
+        }
+        this.passengerList = passengerList.stream().filter(passenger -> (passenger.getPassengerId() <= finalMaxAge && passenger.getPassengerId() >= finalMinAge)).collect(Collectors.toList());
+
+
     }
 
     public void findName(String partOfName) throws IOException {
@@ -390,13 +418,54 @@ public class MainPanel extends JPanel {
         System.out.println(rows);
     }
 
-    public List<Passenger> ageFilter(double ageMax, double ageMin, List<Passenger> list) {
-        System.out.println("ageFilter: start");
-        if (!list.isEmpty()) {
-            list = list.stream().filter(passenger -> (passenger.getAge() <= ageMax && passenger.getAge() >= ageMin)).collect(Collectors.toList());
+    public void percentageStatistics() {
+        this.statistic = new JButton("statistic Button");
+        this.statistic.setBounds(searchButton.getWidth() + searchButton.getX(), 480, 180, 50);
+        this.add(this.statistic);
+        this.statistic.addActionListener(e -> {
+            Statistics statistics = new Statistics(this.passengerList);
+            callInitialization();
+            try {
+                statistics.survivorPercentageInClass(filterPassengerClass(typeClassOfClass));
+                statistics.statisticsInSex(genderFiltering(typeClassOfSex));
+                statistics.ageFilterStatistics();
+                statistics.isFamilyInDeck();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
 
-        }
-        return list;
+        });
+    }
+
+    public void callInitialization() {
+        this.typeClassOfClass = (String) passengerPClass.getSelectedItem();
+        this.typeClassOfSex = (String) passengerSexBox.getSelectedItem();
+        this.typeClassOfEmbarked = (String) passengerEmbarkedBox.getSelectedItem();
+        this.minId = passengerIDMinim.getText();
+        this.maxId = passengerIDMaxim.getText();
+        this.name = passengersNames.getText();
+        this.sibSp = passengerSibAndSp.getText();
+        this.prach = passengerPraAndCh.getText();
+        this.ticket = passengerTickets.getText();
+        this.maxFare = passengerFareMaxim.getText();
+        this.minFare = passengerFareMinim.getText();
+        this.cabins = passengerCabins.getText();
+        this.minAge = passengerAgeMinim.getText();
+        this.maxAge = passengerAgeMaxim.getText();
+    }
+
+    public void callFiltering() throws IOException {
+        filterPassengerClass(typeClassOfClass);
+        genderFiltering(typeClassOfSex);
+        filterPassengerEmbark(typeClassOfEmbarked);
+        IdRangeFiltering(minId, maxId);
+        findName(name);
+        filterSibSp(sibSp);
+        filterPrach(prach);
+        filterTicket(ticket);
+        rangePriceFiltering(minFare, maxFare);
+        filterCabin(cabins);
+        ageFilter(minAge,maxAge);
     }
 }
 

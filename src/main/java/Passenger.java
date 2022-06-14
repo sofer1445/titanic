@@ -28,7 +28,6 @@ public class Passenger {
                 survived = false;
 
         }
-//        survived = dataItem[1].equals("1");
         pclass = Integer.parseInt(dataItem[2]);
         name = dataItem[3];
         sex = dataItem[4];

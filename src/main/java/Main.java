@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.io.FileReader;
 import java.io.IOException;
 
 class Main extends JFrame {
