@@ -256,7 +256,7 @@ public class MainPanel extends JPanel {
 
     public String genderFiltering(String gender) throws IOException {
         System.out.println("genderFiltering: start");
-        String sexType ;
+        String sexType;
         if (!gender.isEmpty()) {
             if (gender.equals("male")) {
                 this.passengerList = passengerList.stream().filter(passenger -> passenger.getSex().equals("male")).collect(Collectors.toList());
@@ -426,10 +426,13 @@ public class MainPanel extends JPanel {
             Statistics statistics = new Statistics(this.passengerList);
             callInitialization();
             try {
-                statistics.survivorPercentageInClass(filterPassengerClass(typeClassOfClass));
-                statistics.statisticsInSex(genderFiltering(typeClassOfSex));
-                statistics.ageFilterStatistics();
-                statistics.isFamilyInDeck();
+                double percentage = statistics.survivorPercentageInClass(filterPassengerClass(typeClassOfClass));
+                double percentage1 = statistics.statisticsInSex(genderFiltering(typeClassOfSex));
+                List<Double> percentage2 = statistics.ageFilterStatistics();
+                List<Double> percentage3 = statistics.isFamilyInDeck();
+                List<Double> percentage4 = statistics.surviveByTicketPrice();
+                double percentage5 = statistics.embarkedStatistics(typeClassOfEmbarked);
+                new WriteToCsv(percentage,percentage1,percentage2,percentage3,percentage4,percentage5);
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -465,7 +468,7 @@ public class MainPanel extends JPanel {
         filterTicket(ticket);
         rangePriceFiltering(minFare, maxFare);
         filterCabin(cabins);
-        ageFilter(minAge,maxAge);
+        ageFilter(minAge, maxAge);
     }
 }
 
