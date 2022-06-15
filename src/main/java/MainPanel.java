@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,13 +41,25 @@ public class MainPanel extends JPanel {
     private String maxAge;
     private int counter = 0;
 
-    public MainPanel(int x, int y, int width, int height) throws IOException {
 
-        File fileOfCsv = new File(Constants.PATH_TO_DATA_FILE);
+    public MainPanel(int x, int y, int width, int height) throws IOException {
+        File fileOfCsv = new File(Final.PATH_TO_DATA_FILE);
         this.setLayout(null);
-        this.setBounds(x, y + Constants.MARGIN_FROM_TOP, width, height);
+        this.setBounds(x, y + Final.MARGIN_FROM_TOP, width, height);
+//        ImageIcon imageIcon = new ImageIcon("titamic.png");
+
         createPassengerList(fileOfCsv);
         allUserFilter();
+
+
+
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        ImageIcon imageIcon = new ImageIcon("titamic.png");
+        imageIcon.paintIcon(this,g,0,0);
 
     }
 
@@ -59,118 +72,119 @@ public class MainPanel extends JPanel {
     }
 
     public void allUserFilter() throws IOException {
+
         JLabel passengerClassLabel = new JLabel("Passenger Class: ");
-        passengerClassLabel.setBounds(5, 0, 150, 30);//שינוי שם למחלקת נוסע
+        passengerClassLabel.setBounds(Final.X_LABEL, Final.X_AND_Y, Final.LABEL_WIDTH2, Final.LABEL_HEIGTH2);//שינוי שם למחלקת נוסע
         this.add(passengerClassLabel);
-        this.passengerPClass = new JComboBox<>(Constants.PASSENGER_CLASS_OPTIONS);
-        this.passengerPClass.setBounds(135, 0, Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
+        this.passengerPClass = new JComboBox<>(Final.PASSENGER_CLASS_OPTIONS);
+        this.passengerPClass.setBounds(Final.X_BOX, Final.X_AND_Y, Final.COMBO_BOX_WIDTH, Final.COMBO_BOX_HEIGHT);
         this.add(this.passengerPClass);
 
 
         JLabel passengerSex = new JLabel("Passenger Sex: ");
-        passengerSex.setBounds(5, -10, 100, 130);//שינוי שם למחלקת נוסע
+        passengerSex.setBounds(Final.X_LABEL, Final.YLABEL, Final.WIDTH_LABEL, Final.LABEL_HIGTH_BOUNDS);//שינוי שם למחלקת נוסע
         this.add(passengerSex);
-        this.passengerSexBox = new JComboBox<>(Constants.SEX_PASSENGER);
-        this.passengerSexBox.setBounds(135, 40, 80, 30);
+        this.passengerSexBox = new JComboBox<>(Final.SEX_PASSENGER);
+        this.passengerSexBox.setBounds(Final.X_BOX, Final.YLABEL2, Final.BOUNDS_WIDTH, Final.LABEL_HEIGTH2);
         this.add(this.passengerSexBox);
 
         JLabel passengerEmbarked = new JLabel("Passenger Embarked: ");
-        passengerEmbarked.setBounds(5, 30, 140, 130);//שינוי שם למחלקת נוסע
+        passengerEmbarked.setBounds(Final.X_LABEL, Final.YLABEL3, Final.LABEL_WIDTH3, Final.LABEL_HIGTH_BOUNDS);//שינוי שם למחלקת נוסע
         this.add(passengerEmbarked);
-        this.passengerEmbarkedBox = new JComboBox<>(Constants.Embarked);
-        this.passengerEmbarkedBox.setBounds(135, 80, 80, 30);
+        this.passengerEmbarkedBox = new JComboBox<>(Final.Embarked);
+        this.passengerEmbarkedBox.setBounds(Final.X_BOX, Final.YLABEL4, Final.BOUNDS_WIDTH, Final.LABEL_HEIGTH2);
         this.add(this.passengerEmbarkedBox);
 
 
         JLabel passengerIDMin = new JLabel("Passenger ID MIN: ");
-        passengerIDMin.setBounds(5, 70, 140, 130);//שינוי שם למחלקת נוסע
+        passengerIDMin.setBounds(Final.X_LABEL, Final.Y1, Final.LABEL_WIDTH3, Final.LABEL_HIGTH_BOUNDS);//שינוי שם למחלקת נוסע
         this.add(passengerIDMin);
         this.passengerIDMinim = new JTextField("");
-        this.passengerIDMinim.setBounds(135, 120, 80, 30);
+        this.passengerIDMinim.setBounds(Final.X_BOX, Final.Y2, Final.BOUNDS_WIDTH, Final.LABEL_HEIGTH2);
         this.add(this.passengerIDMinim);
 
 
         JLabel passengerIDMax = new JLabel("Passenger ID MAX: ");
-        passengerIDMax.setBounds(5, 110, 140, 130);//שינוי שם למחלקת נוסע
+        passengerIDMax.setBounds(Final.X_LABEL, Final.Y3, Final.LABEL_WIDTH3, Final.LABEL_HIGTH_BOUNDS);//שינוי שם למחלקת נוסע
         this.add(passengerIDMax);
         this.passengerIDMaxim = new JTextField("");
-        this.passengerIDMaxim.setBounds(135, 160, 80, 30);
+        this.passengerIDMaxim.setBounds(Final.X_BOX, Final.Y4, Final.BOUNDS_WIDTH, Final.LABEL_HEIGTH2);
         this.add(this.passengerIDMaxim);
 
 
         JLabel passengerName = new JLabel("Passenger Name: ");
-        passengerName.setBounds(5, 150, 140, 130);//שינוי שם למחלקת נוסע
+        passengerName.setBounds(Final.X_LABEL, Final.Y5, Final.LABEL_WIDTH3, Final.LABEL_HIGTH_BOUNDS);//שינוי שם למחלקת נוסע
         this.add(passengerName);
         this.passengersNames = new JTextField("");
-        this.passengersNames.setBounds(135, 200, 80, 30);
+        this.passengersNames.setBounds(Final.X_BOX, Final.Y6, Final.BOUNDS_WIDTH, Final.LABEL_HEIGTH2);
         this.add(this.passengersNames);
 
 
         JLabel passengerSibSp = new JLabel("Passenger Sib&Sp: ");
-        passengerSibSp.setBounds(5, 190, 140, 130);//שינוי שם למחלקת נוסע
+        passengerSibSp.setBounds(Final.X_LABEL, Final.Y7, Final.LABEL_WIDTH3, Final.LABEL_HIGTH_BOUNDS);//שינוי שם למחלקת נוסע
         this.add(passengerSibSp);
         this.passengerSibAndSp = new JTextField("");
-        this.passengerSibAndSp.setBounds(135, 240, 80, 30);
+        this.passengerSibAndSp.setBounds(Final.X_BOX, Final.Y8, Final.BOUNDS_WIDTH, Final.LABEL_HEIGTH2);
         this.add(this.passengerSibAndSp);
 
         JLabel passengerPrach = new JLabel("Passenger Prach: ");
-        passengerPrach.setBounds(5, 230, 140, 130);//שינוי שם למחלקת נוסע
+        passengerPrach.setBounds(Final.X_LABEL, Final.Y9, Final.LABEL_WIDTH3, Final.LABEL_HIGTH_BOUNDS);//שינוי שם למחלקת נוסע
         this.add(passengerPrach);
         this.passengerPraAndCh = new JTextField("");
-        this.passengerPraAndCh.setBounds(135, 280, 80, 30);
+        this.passengerPraAndCh.setBounds(Final.X_BOX, Final.Y10, Final.BOUNDS_WIDTH, Final.LABEL_HEIGTH2);
         this.add(this.passengerPraAndCh);
 
 
         JLabel passengerTicket = new JLabel("Passenger Ticket: ");
-        passengerTicket.setBounds(5, 270, 140, 130);//שינוי שם למחלקת נוסע
+        passengerTicket.setBounds(Final.X_LABEL, Final.Y11, Final.LABEL_WIDTH3, Final.LABEL_HIGTH_BOUNDS);//שינוי שם למחלקת נוסע
         this.add(passengerTicket);
         this.passengerTickets = new JTextField("");
-        this.passengerTickets.setBounds(135, 320, 80, 30);
+        this.passengerTickets.setBounds(Final.X_BOX, Final.Y12, Final.BOUNDS_WIDTH, Final.LABEL_HEIGTH2);
         this.add(this.passengerTickets);
 
 
         JLabel passengerFareMax = new JLabel("Passenger Max Fare: ");
-        passengerFareMax.setBounds(5, 310, 140, 130);//שינוי שם למחלקת נוסע
+        passengerFareMax.setBounds(Final.X_LABEL, Final.Y13, Final.LABEL_WIDTH3, Final.LABEL_HIGTH_BOUNDS);//שינוי שם למחלקת נוסע
         this.add(passengerFareMax);
         this.passengerFareMaxim = new JTextField("");
-        this.passengerFareMaxim.setBounds(135, 360, 80, 30);
+        this.passengerFareMaxim.setBounds(Final.X_BOX, Final.Y14, Final.BOUNDS_WIDTH, Final.LABEL_HEIGTH2);
         this.add(this.passengerFareMaxim);
 
 
         JLabel passengerFareMin = new JLabel("Passenger Min Fare: ");
-        passengerFareMin.setBounds(5, 350, 140, 130);//שינוי שם למחלקת נוסע
+        passengerFareMin.setBounds(Final.X_LABEL, Final.Y15, Final.LABEL_WIDTH3, Final.LABEL_HIGTH_BOUNDS);//שינוי שם למחלקת נוסע
         this.add(passengerFareMin);
         this.passengerFareMinim = new JTextField("");
-        this.passengerFareMinim.setBounds(135, 400, 80, 30);
+        this.passengerFareMinim.setBounds(Final.X_BOX, Final.Y16, Final.BOUNDS_WIDTH, Final.LABEL_HEIGTH2);
         this.add(this.passengerFareMinim);
 
 
         JLabel passengerCabin = new JLabel("Passenger Cabin: ");
-        passengerCabin.setBounds(5, 390, 140, 130);//שינוי שם למחלקת נוסע
+        passengerCabin.setBounds(Final.X_LABEL, Final.Y17, Final.LABEL_WIDTH3, Final.LABEL_HIGTH_BOUNDS);//שינוי שם למחלקת נוסע
         this.add(passengerCabin);
         this.passengerCabins = new JTextField("");
-        this.passengerCabins.setBounds(135, 440, 80, 30);
+        this.passengerCabins.setBounds(Final.X_BOX, Final.Y18, Final.BOUNDS_WIDTH, Final.LABEL_HEIGTH2);
         this.add(this.passengerCabins);
 
 
         JLabel passengerAgeMin = new JLabel("Passenger AGE MIN: ");
-        passengerAgeMin.setBounds(passengerIDMinim.getWidth() + passengerIDMinim.getX(), 70, 140, 130);
+        passengerAgeMin.setBounds(passengerIDMinim.getWidth() + passengerIDMinim.getX(), Final.Y1, Final.LABEL_WIDTH3, Final.LABEL_HIGTH_BOUNDS);
         this.add(passengerAgeMin);
         this.passengerAgeMinim = new JTextField("");
-        this.passengerAgeMinim.setBounds(passengerAgeMin.getWidth() + passengerAgeMin.getX(), 120, 80, 30);
+        this.passengerAgeMinim.setBounds(passengerAgeMin.getWidth() + passengerAgeMin.getX(), Final.Y2, Final.BOUNDS_WIDTH, Final.LABEL_HEIGTH2);
         this.add(this.passengerAgeMinim);
 
 
         JLabel passengerAgeMax = new JLabel("Passenger AGE MAX: ");
-        passengerAgeMax.setBounds(passengerIDMaxim.getWidth() + passengerIDMaxim.getX(), 110, 140, 130);
+        passengerAgeMax.setBounds(passengerIDMaxim.getWidth() + passengerIDMaxim.getX(), Final.Y3, Final.LABEL_WIDTH3, Final.LABEL_HIGTH_BOUNDS);
         this.add(passengerAgeMax);
         this.passengerAgeMaxim = new JTextField("");
-        this.passengerAgeMaxim.setBounds(passengerAgeMax.getWidth() + passengerAgeMax.getX(), 160, 80, 30);
+        this.passengerAgeMaxim.setBounds(passengerAgeMax.getWidth() + passengerAgeMax.getX(), Final.Y4, Final.BOUNDS_WIDTH, Final.LABEL_HEIGTH2);
         this.add(this.passengerAgeMaxim);
 
 
         this.searchButton = new JButton("Search Button");
-        this.searchButton.setBounds(80, 480, 180, 50);
+        this.searchButton.setBounds(Final.X_BUTTON, Final.Y19, Final.BUTTOM_WIDTH, Final.BUTTOM_HEIGHT);
         this.add(this.searchButton);
 
         this.searchButton.addActionListener(e -> {
@@ -304,7 +318,7 @@ public class MainPanel extends JPanel {
         if (!maxId.isEmpty()) {
             finalMaxId = Integer.parseInt(maxId);
         } else {
-            finalMaxId = Constants.MAX_INDEX_LIST;
+            finalMaxId = Final.MAX_INDEX_LIST;
         }
 
         this.passengerList = passengerList.stream().filter(passenger -> (passenger.getPassengerId() <= finalMaxId && passenger.getPassengerId() >= finalMinId)).collect(Collectors.toList());
@@ -382,7 +396,7 @@ public class MainPanel extends JPanel {
         if (!maxFare.isEmpty()) {
             finalMaxFare = Double.parseDouble(maxFare);
         } else {
-            finalMaxFare = 512.3292; // לעשות פינל של מחיר מקסימלי
+            finalMaxFare = Final.MAX_FREE; // לעשות פינל של מחיר מקסימלי
         }
         this.passengerList = passengerList.stream().filter(passenger -> passenger.getFare() <= finalMaxFare && passenger.getFare() >= finalMinFare).collect(Collectors.toList());
 
@@ -420,7 +434,7 @@ public class MainPanel extends JPanel {
 
     public void percentageStatistics() {
         this.statistic = new JButton("statistic Button");
-        this.statistic.setBounds(searchButton.getWidth() + searchButton.getX(), 480, 180, 50);
+        this.statistic.setBounds(searchButton.getWidth() + searchButton.getX(), Final.Y19, Final.BUTTOM_WIDTH, Final.BUTTOM_HEIGHT);
         this.add(this.statistic);
         this.statistic.addActionListener(e -> {
             Statistics statistics = new Statistics(this.passengerList);
@@ -473,16 +487,5 @@ public class MainPanel extends JPanel {
 }
 
 
-//    public List<String> getPasClass(List<Passenger> passengers){
-//    import com.gembox.spreadsheet.SpreadsheetInfo;
-// public static void writeToTextFile (String path, String text) {
-//        try {
-//            FileWriter fileWriter = new FileWriter(path);
-//            fileWriter.write(text);
-//            fileWriter.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
 

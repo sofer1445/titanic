@@ -46,11 +46,11 @@ public class Statistics extends JPanel {
             passenger = list.size();
             survivor = this.list.stream().filter(Passenger::isSurvived).collect(Collectors.toList());
             survivorPass = survivor.size();
-            percentage = (survivorPass / passenger) * 100;
+            percentage = (survivorPass / passenger) * Final.PERCENTAGE;
             System.out.println("Percentage of survivors by sex " + sex + " is:" + percentage + " %");
         }else {
             survivorPass = (int) this.list.stream().filter(Passenger::isSurvived).count();
-            percentage = (survivorPass / list.size()) * 100;
+            percentage = (survivorPass / list.size()) * Final.PERCENTAGE;
             System.out.println("Percentage of survivors by sex " + sex + " is:" + percentage + " %");
         }
         return percentage;
@@ -71,42 +71,42 @@ public class Statistics extends JPanel {
             System.out.println("0-10");
             pass = (int) list.stream().filter(passenger -> (passenger.getAge() <= 10 && passenger.getAge() >= 0)).count();
             zeroToTen = (int) list.stream().filter(passenger -> (passenger.getAge() <= 10 && passenger.getAge() >= 0) && (passenger.isSurvived())).count();
-            percentage = (zeroToTen / pass) * 100;
+            percentage = (zeroToTen / pass) * Final.PERCENTAGE;
             doubles.add(percentage);
             System.out.println("Percentage of survivors among the ages zeroToTen is: " + percentage + " %");
 
             System.out.println("11-20");
             pass = (int) list.stream().filter(passenger -> (passenger.getAge() <= 20 && passenger.getAge() >= 11)).count();
             elevenToTwenty = (int) list.stream().filter(passenger -> (passenger.getAge() <= 20 && passenger.getAge() >= 11) && (passenger.isSurvived())).count();
-            percentage = (elevenToTwenty / pass) * 100;
+            percentage = (elevenToTwenty / pass) * Final.PERCENTAGE;
             doubles.add(percentage);
             System.out.println("Percentage of survivors among the ages elevenToTwenty is: " + percentage + " %");
 
             System.out.println("21-30");
             pass = (int) list.stream().filter(passenger -> (passenger.getAge() <= 30 && passenger.getAge() >= 21)).count();
             twentyOneToThirty = (int) list.stream().filter(passenger -> (passenger.getAge() <= 30 && passenger.getAge() >= 21) && (passenger.isSurvived())).count();
-            percentage = (twentyOneToThirty / pass) * 100;
+            percentage = (twentyOneToThirty / pass) * Final.PERCENTAGE;
             doubles.add(percentage);
             System.out.println("Percentage of survivors among the ages twentyOneToThirty is: " + percentage + " %");
 
             System.out.println("31-40");
             pass = (int) list.stream().filter(passenger -> (passenger.getAge() <= 40 && passenger.getAge() >= 31)).count();
             thirtyOneToForty = (int) list.stream().filter(passenger -> (passenger.getAge() <= 40 && passenger.getAge() >= 31) && (passenger.isSurvived())).count();
-            percentage = (thirtyOneToForty / pass) * 100;
+            percentage = (thirtyOneToForty / pass) * Final.PERCENTAGE;
             doubles.add(percentage);
             System.out.println("Percentage of survivors among the ages thirtyOneToForty is: " + percentage + " %");
 
             System.out.println("41-50");
             pass = (int) list.stream().filter(passenger -> (passenger.getAge() <= 50 && passenger.getAge() >= 41)).count();
             fortyOneToFifty = (int) list.stream().filter(passenger -> (passenger.getAge() <= 50 && passenger.getAge() >= 41) && (passenger.isSurvived())).count();
-            percentage = (fortyOneToFifty / pass) * 100;
+            percentage = (fortyOneToFifty / pass) * Final.PERCENTAGE;
             doubles.add(percentage);
             System.out.println("Percentage of survivors among the ages fortyOneToFifty is: " + percentage + " %");
 
             System.out.println("51+");
             pass = (int) list.stream().filter(passenger -> (passenger.getAge() >= 51)).count();
             fiftyOnePlus = (int) list.stream().filter(passenger -> (passenger.getAge() >= 51) && (passenger.isSurvived())).count();
-            percentage = (fiftyOnePlus / pass) * 100;
+            percentage = (fiftyOnePlus / pass) * Final.PERCENTAGE;
             doubles.add(percentage);
             System.out.println("Percentage of survivors the ages fiftyOnePlus is: " + percentage + " %");
 
@@ -114,7 +114,6 @@ public class Statistics extends JPanel {
             System.out.println("There are no passengers meeting the typed parameters");
         }
 
-        //0-10,11-20,21-30,31-40,41-50,51+
         return doubles;
 
     }
@@ -130,13 +129,13 @@ public class Statistics extends JPanel {
         if (!list.isEmpty()) {
             pass = (double) list.stream().filter(passenger -> !Objects.equals(passenger.getSibSp(), "0")).count() + (double) list.stream().filter(passenger -> !Objects.equals(passenger.getParch(), "0")).count();
             withFamily = (double) list.stream().filter(passenger -> !Objects.equals(passenger.getSibSp(), "0") && passenger.isSurvived()).count() + (double) list.stream().filter(passenger -> !Objects.equals(passenger.getParch(), "0") && passenger.isSurvived()).count();
-            percentage = (withFamily / pass) * 100;
+            percentage = (withFamily / pass) * Final.PERCENTAGE;
             doubles.add(percentage);
             System.out.println("The percentage of survivors with a family are: " + percentage + " %");
 
             pass = (double) list.stream().filter(passenger -> Objects.equals(passenger.getSibSp(), "0")).count() + (double) list.stream().filter(passenger -> Objects.equals(passenger.getParch(), "0")).count();
             withoutFamily = (double) list.stream().filter(passenger -> Objects.equals(passenger.getSibSp(), "0") && passenger.isSurvived()).count() + (double) list.stream().filter(passenger -> Objects.equals(passenger.getParch(), "0") && passenger.isSurvived()).count();
-            percentage = (withoutFamily / pass) * 100;
+            percentage = (withoutFamily / pass) * Final.PERCENTAGE;
             doubles.add(percentage);
             System.out.println("The percentage of survivors without a family is: " + percentage + " %");
         } else {
@@ -157,27 +156,27 @@ public class Statistics extends JPanel {
             System.out.println("tenMinus");
             pass = (int) list.stream().filter(passenger -> passenger.getFare() <= 10).count();
             tenMinus = (int) list.stream().filter(passenger -> passenger.getFare() <= 10 && passenger.isSurvived()).count();
-            percentage = (tenMinus / pass) * 100;
+            percentage = (tenMinus / pass) * Final.PERCENTAGE;
             doubles.add(percentage);
             System.out.println("Percentage of survivors according to ticket price tenMinus " + percentage + " %");
 
             System.out.println("elevenToThirty");
             pass = (int) list.stream().filter(passenger -> passenger.getFare() <= 30 && passenger.getFare() >= 11).count();
             elevenToThirty = (int) list.stream().filter(passenger -> (passenger.getFare() < 30 && passenger.getFare() >= 11) && passenger.isSurvived()).count();
-            percentage = (elevenToThirty / pass) * 100;
+            percentage = (elevenToThirty / pass) * Final.PERCENTAGE;
             doubles.add(percentage);
             System.out.println("Percentage of survivors according to ticket price elevenToThirty " + percentage + " %");
 
             System.out.println("thirtyPlus");
             pass = (int) list.stream().filter(passenger -> passenger.getFare() >= 30).count();
             thirtyPlus = (int) list.stream().filter(passenger -> (passenger.getFare() >= 30) && passenger.isSurvived()).count();
-            percentage = (thirtyPlus / pass) * 100;
+            percentage = (thirtyPlus / pass) * Final.PERCENTAGE;
             doubles.add(percentage);
             System.out.println("Percentage of survivors according to ticket price thirtyPlus " + percentage + " %");
         }
         return doubles;
 
-        //-10,11-30,30+
+
     }
 
     public double embarkedStatistics(String cabinType) {
@@ -191,7 +190,7 @@ public class Statistics extends JPanel {
         }
         pass = list.size();
         live = (int) this.list.stream().filter(Passenger::isSurvived).count();
-        percentage = (live / pass) * 100;
+        percentage = (live / pass) * Final.PERCENTAGE;
 
         System.out.println("The percentage of survivors in Cabin " + cabinType + ": is " + percentage + " %");
         return percentage;

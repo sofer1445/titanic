@@ -1,4 +1,4 @@
-import javax.swing.*;
+
 
 public class Passenger {
     private int passengerId;
@@ -15,8 +15,6 @@ public class Passenger {
     private String embarked;
 
     public Passenger(String lineData) {
-//        String original = lineData;
-//        System.out.println(original);
         String[] dataItem = lineData.split(",");
         dataItem = toFixArrayStr(dataItem);
         passengerId = Integer.parseInt(dataItem[0]);
@@ -96,7 +94,7 @@ public class Passenger {
     }
 
     public void setPassengerId(int passengerId) {
-        if (passengerId > 0 && passengerId < 892) {
+        if (passengerId > 0 && passengerId < 849 ) {
             this.passengerId = passengerId;
         } else {
             this.passengerId = 0;
